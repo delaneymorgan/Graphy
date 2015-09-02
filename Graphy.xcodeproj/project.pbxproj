@@ -1,0 +1,301 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5B936BE212A3869B009BB641 /* Graphy_defs.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B936BCF12A3869B009BB641 /* Graphy_defs.h */; };
+		5B936BE312A3869B009BB641 /* GraphyAxis.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B936BD012A3869B009BB641 /* GraphyAxis.h */; };
+		5B936BE412A3869B009BB641 /* GraphyAxis.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B936BD112A3869B009BB641 /* GraphyAxis.m */; };
+		5B936BE512A3869B009BB641 /* GraphyGraduation.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B936BD212A3869B009BB641 /* GraphyGraduation.h */; };
+		5B936BE612A3869B009BB641 /* GraphyGraduation.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B936BD312A3869B009BB641 /* GraphyGraduation.m */; };
+		5B936BE712A3869B009BB641 /* GraphyGraph.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B936BD412A3869B009BB641 /* GraphyGraph.h */; };
+		5B936BE812A3869B009BB641 /* GraphyGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B936BD512A3869B009BB641 /* GraphyGraph.m */; };
+		5B936BEB12A3869B009BB641 /* GraphyLegend.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B936BD812A3869B009BB641 /* GraphyLegend.h */; };
+		5B936BEC12A3869B009BB641 /* GraphyLegend.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B936BD912A3869B009BB641 /* GraphyLegend.m */; };
+		5B936BED12A3869B009BB641 /* GraphyPlot.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B936BDA12A3869B009BB641 /* GraphyPlot.h */; };
+		5B936BEE12A3869B009BB641 /* GraphyPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B936BDB12A3869B009BB641 /* GraphyPlot.m */; };
+		5B936BEF12A3869B009BB641 /* GraphyRange.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B936BDC12A3869B009BB641 /* GraphyRange.h */; };
+		5B936BF012A3869B009BB641 /* GraphyRange.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B936BDD12A3869B009BB641 /* GraphyRange.m */; };
+		5B936BF112A3869B009BB641 /* GraphyScale.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B936BDE12A3869B009BB641 /* GraphyScale.h */; };
+		5B936BF212A3869B009BB641 /* GraphyScale.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B936BDF12A3869B009BB641 /* GraphyScale.m */; };
+		5B936BF312A3869B009BB641 /* GraphyView.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B936BE012A3869B009BB641 /* GraphyView.h */; };
+		5B936BF412A3869B009BB641 /* GraphyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5B936BE112A3869B009BB641 /* GraphyView.m */; };
+		5B936BF912A386A8009BB641 /* dbc_def.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B936BF712A386A8009BB641 /* dbc_def.h */; };
+		5B936BFA12A386A8009BB641 /* trace_def.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B936BF812A386A8009BB641 /* trace_def.h */; };
+		AA747D9F0F9514B9006C5449 /* Graphy_Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = AA747D9E0F9514B9006C5449 /* Graphy_Prefix.pch */; };
+		AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AACBBE490F95108600F1A2B1 /* Foundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		5B936BCF12A3869B009BB641 /* Graphy_defs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Graphy_defs.h; path = Source/Classes/Graphy_defs.h; sourceTree = "<group>"; };
+		5B936BD012A3869B009BB641 /* GraphyAxis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GraphyAxis.h; path = Source/Classes/GraphyAxis.h; sourceTree = "<group>"; };
+		5B936BD112A3869B009BB641 /* GraphyAxis.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GraphyAxis.m; path = Source/Classes/GraphyAxis.m; sourceTree = "<group>"; };
+		5B936BD212A3869B009BB641 /* GraphyGraduation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GraphyGraduation.h; path = Source/Classes/GraphyGraduation.h; sourceTree = "<group>"; };
+		5B936BD312A3869B009BB641 /* GraphyGraduation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GraphyGraduation.m; path = Source/Classes/GraphyGraduation.m; sourceTree = "<group>"; };
+		5B936BD412A3869B009BB641 /* GraphyGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GraphyGraph.h; path = Source/Classes/GraphyGraph.h; sourceTree = "<group>"; };
+		5B936BD512A3869B009BB641 /* GraphyGraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GraphyGraph.m; path = Source/Classes/GraphyGraph.m; sourceTree = "<group>"; };
+		5B936BD812A3869B009BB641 /* GraphyLegend.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GraphyLegend.h; path = Source/Classes/GraphyLegend.h; sourceTree = "<group>"; };
+		5B936BD912A3869B009BB641 /* GraphyLegend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GraphyLegend.m; path = Source/Classes/GraphyLegend.m; sourceTree = "<group>"; };
+		5B936BDA12A3869B009BB641 /* GraphyPlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GraphyPlot.h; path = Source/Classes/GraphyPlot.h; sourceTree = "<group>"; };
+		5B936BDB12A3869B009BB641 /* GraphyPlot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GraphyPlot.m; path = Source/Classes/GraphyPlot.m; sourceTree = "<group>"; };
+		5B936BDC12A3869B009BB641 /* GraphyRange.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GraphyRange.h; path = Source/Classes/GraphyRange.h; sourceTree = "<group>"; };
+		5B936BDD12A3869B009BB641 /* GraphyRange.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GraphyRange.m; path = Source/Classes/GraphyRange.m; sourceTree = "<group>"; };
+		5B936BDE12A3869B009BB641 /* GraphyScale.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GraphyScale.h; path = Source/Classes/GraphyScale.h; sourceTree = "<group>"; };
+		5B936BDF12A3869B009BB641 /* GraphyScale.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GraphyScale.m; path = Source/Classes/GraphyScale.m; sourceTree = "<group>"; };
+		5B936BE012A3869B009BB641 /* GraphyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GraphyView.h; path = Source/Classes/GraphyView.h; sourceTree = "<group>"; };
+		5B936BE112A3869B009BB641 /* GraphyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GraphyView.m; path = Source/Classes/GraphyView.m; sourceTree = "<group>"; };
+		5B936BF712A386A8009BB641 /* dbc_def.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = dbc_def.h; path = Source/dbc_def.h; sourceTree = "<group>"; };
+		5B936BF812A386A8009BB641 /* trace_def.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = trace_def.h; path = Source/trace_def.h; sourceTree = "<group>"; };
+		AA747D9E0F9514B9006C5449 /* Graphy_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Graphy_Prefix.pch; sourceTree = SOURCE_ROOT; };
+		AACBBE490F95108600F1A2B1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D2AAC07E0554694100DB518D /* libGraphy.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libGraphy.a; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D2AAC07C0554694100DB518D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AACBBE4A0F95108600F1A2B1 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		034768DFFF38A50411DB9C8B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AAC07E0554694100DB518D /* libGraphy.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0867D691FE84028FC02AAC07 /* Graphy */ = {
+			isa = PBXGroup;
+			children = (
+				08FB77AEFE84172EC02AAC07 /* Classes */,
+				32C88DFF0371C24200C91783 /* Other Sources */,
+				0867D69AFE84028FC02AAC07 /* Frameworks */,
+				034768DFFF38A50411DB9C8B /* Products */,
+			);
+			name = Graphy;
+			sourceTree = "<group>";
+		};
+		0867D69AFE84028FC02AAC07 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AACBBE490F95108600F1A2B1 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		08FB77AEFE84172EC02AAC07 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				5B936BCF12A3869B009BB641 /* Graphy_defs.h */,
+				5B936BD012A3869B009BB641 /* GraphyAxis.h */,
+				5B936BD112A3869B009BB641 /* GraphyAxis.m */,
+				5B936BD212A3869B009BB641 /* GraphyGraduation.h */,
+				5B936BD312A3869B009BB641 /* GraphyGraduation.m */,
+				5B936BD412A3869B009BB641 /* GraphyGraph.h */,
+				5B936BD512A3869B009BB641 /* GraphyGraph.m */,
+				5B936BD812A3869B009BB641 /* GraphyLegend.h */,
+				5B936BD912A3869B009BB641 /* GraphyLegend.m */,
+				5B936BDA12A3869B009BB641 /* GraphyPlot.h */,
+				5B936BDB12A3869B009BB641 /* GraphyPlot.m */,
+				5B936BDC12A3869B009BB641 /* GraphyRange.h */,
+				5B936BDD12A3869B009BB641 /* GraphyRange.m */,
+				5B936BDE12A3869B009BB641 /* GraphyScale.h */,
+				5B936BDF12A3869B009BB641 /* GraphyScale.m */,
+				5B936BE012A3869B009BB641 /* GraphyView.h */,
+				5B936BE112A3869B009BB641 /* GraphyView.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		32C88DFF0371C24200C91783 /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				5B936BF712A386A8009BB641 /* dbc_def.h */,
+				5B936BF812A386A8009BB641 /* trace_def.h */,
+				AA747D9E0F9514B9006C5449 /* Graphy_Prefix.pch */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D2AAC07A0554694100DB518D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA747D9F0F9514B9006C5449 /* Graphy_Prefix.pch in Headers */,
+				5B936BE212A3869B009BB641 /* Graphy_defs.h in Headers */,
+				5B936BE312A3869B009BB641 /* GraphyAxis.h in Headers */,
+				5B936BE512A3869B009BB641 /* GraphyGraduation.h in Headers */,
+				5B936BE712A3869B009BB641 /* GraphyGraph.h in Headers */,
+				5B936BEB12A3869B009BB641 /* GraphyLegend.h in Headers */,
+				5B936BED12A3869B009BB641 /* GraphyPlot.h in Headers */,
+				5B936BEF12A3869B009BB641 /* GraphyRange.h in Headers */,
+				5B936BF112A3869B009BB641 /* GraphyScale.h in Headers */,
+				5B936BF312A3869B009BB641 /* GraphyView.h in Headers */,
+				5B936BF912A386A8009BB641 /* dbc_def.h in Headers */,
+				5B936BFA12A386A8009BB641 /* trace_def.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		D2AAC07D0554694100DB518D /* Graphy */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB921E08733DC00010E9CD /* Build configuration list for PBXNativeTarget "Graphy" */;
+			buildPhases = (
+				D2AAC07A0554694100DB518D /* Headers */,
+				D2AAC07B0554694100DB518D /* Sources */,
+				D2AAC07C0554694100DB518D /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Graphy;
+			productName = Graphy;
+			productReference = D2AAC07E0554694100DB518D /* libGraphy.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0867D690FE84028FC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0640;
+				ORGANIZATIONNAME = "Delaney & Morgan Computing";
+			};
+			buildConfigurationList = 1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "Graphy" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 0867D691FE84028FC02AAC07 /* Graphy */;
+			productRefGroup = 034768DFFF38A50411DB9C8B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D2AAC07D0554694100DB518D /* Graphy */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D2AAC07B0554694100DB518D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5B936BE412A3869B009BB641 /* GraphyAxis.m in Sources */,
+				5B936BE612A3869B009BB641 /* GraphyGraduation.m in Sources */,
+				5B936BE812A3869B009BB641 /* GraphyGraph.m in Sources */,
+				5B936BEC12A3869B009BB641 /* GraphyLegend.m in Sources */,
+				5B936BEE12A3869B009BB641 /* GraphyPlot.m in Sources */,
+				5B936BF012A3869B009BB641 /* GraphyRange.m in Sources */,
+				5B936BF212A3869B009BB641 /* GraphyScale.m in Sources */,
+				5B936BF412A3869B009BB641 /* GraphyView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB921F08733DC00010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DSTROOT = /tmp/Graphy.dst;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Graphy_Prefix.pch;
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = Graphy;
+			};
+			name = Debug;
+		};
+		1DEB922008733DC00010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DSTROOT = /tmp/Graphy.dst;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = Graphy_Prefix.pch;
+				INSTALL_PATH = /usr/local/lib;
+				PRODUCT_NAME = Graphy;
+			};
+			name = Release;
+		};
+		1DEB922308733DC00010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PREBINDING = NO;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		1DEB922408733DC00010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				OTHER_LDFLAGS = "-ObjC";
+				PREBINDING = NO;
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB921E08733DC00010E9CD /* Build configuration list for PBXNativeTarget "Graphy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB921F08733DC00010E9CD /* Debug */,
+				1DEB922008733DC00010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB922208733DC00010E9CD /* Build configuration list for PBXProject "Graphy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB922308733DC00010E9CD /* Debug */,
+				1DEB922408733DC00010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0867D690FE84028FC02AAC07 /* Project object */;
+}

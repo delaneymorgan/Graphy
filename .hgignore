@@ -1,0 +1,9 @@
+syntax: glob
+*~
+.DS_Store
+Thumbs.db
+
+syntax: regexp
+^build/*
+^autodoc/*
+.*\.orig$
