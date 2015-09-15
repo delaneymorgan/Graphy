@@ -431,7 +431,7 @@
 				INFOPLIST_FILE = TestGraphy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "../../../Graphy/Source/**";
+				USER_HEADER_SEARCH_PATHS = "../../Source/**";
 			};
 			name = Debug;
 		};
@@ -442,7 +442,7 @@
 				INFOPLIST_FILE = TestGraphy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				USER_HEADER_SEARCH_PATHS = "../../../Graphy/Source/**";
+				USER_HEADER_SEARCH_PATHS = "../../Source/**";
 			};
 			name = Release;
 		};
