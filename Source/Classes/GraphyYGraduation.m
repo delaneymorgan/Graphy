@@ -8,28 +8,23 @@
 
 #import "GraphyYGraduation.h"
 
-#import "dbc_def.h"
 #import "trace_def.h"
-#import "Utility.h"
 
 
 @implementation GraphyYGraduation
 
 
-#define TRACE_FLAG		(NO)
+#define TRACE_FLAG		(YES)
 
 // ============================================================================================
 
 
--(id)initWithIncrement:(TCoordinate)qIncrement {
+-(instancetype)initWithIncrement:(TCoordinate)qIncrement {
 	TRACE_START();
 	
 	if (self = [super initWithIncrement:qIncrement]) {
     }
 	TRACE_END();
-	return self;
-	
-EXCEPTION:
 	return self;
 }
 
@@ -43,27 +38,21 @@ EXCEPTION:
 	
 	// save original context
 	context = UIGraphicsGetCurrentContext();
-	MIDCONDITION( context);
 	UIGraphicsPushContext( context);
-	
-	TRACE_CHECK( @"qPoint: %@", PrintCGPoint( qPoint));
 	
 	// draw graduation
 	CGPoint point = qPoint;
 	// +=+ need to allow for thickness of graduation
-	CGContextMoveToPoint( context, point.x - ( height / 2), point.y);
-	CGContextAddLineToPoint( context, point.x + ( height / 2), point.y);
-	CGContextSetStrokeColorWithColor( context, color.CGColor);
-	CGContextSetLineWidth( context, width);
+	CGContextMoveToPoint( context, point.x - ( self.height / 2), point.y);
+	CGContextAddLineToPoint( context, point.x + ( self.height / 2), point.y);
+	CGContextSetStrokeColorWithColor( context, self.color.CGColor);
+	CGContextSetLineWidth( context, self.width);
 	CGContextStrokePath( context);
 	
 	// restore original context
 	UIGraphicsPopContext();
 	
 	TRACE_END();
-	return;
-	
-EXCEPTION:
 	return;
 }
 

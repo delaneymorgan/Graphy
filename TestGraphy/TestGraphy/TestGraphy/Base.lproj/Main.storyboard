@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Graphy View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="GraphyViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ovY-UW-22f">
+                                <rect key="frame" x="16" y="20" width="568" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EjN-Pk-fIz" customClass="GraphyView">
+                                <rect key="frame" x="16" y="57" width="568" height="523"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mfV-yk-eBh">
+                                <rect key="frame" x="18" y="57" width="568" height="523"/>
+                                <state key="normal">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="graphPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gOI-OB-yXK"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="mfV-yk-eBh" secondAttribute="trailing" constant="-2" id="5Ks-Oy-UMU"/>
+                            <constraint firstItem="ovY-UW-22f" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="KIA-hi-qyy"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="mfV-yk-eBh" secondAttribute="bottom" constant="20" id="TTV-fX-vN4"/>
+                            <constraint firstItem="EjN-Pk-fIz" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="VXR-XI-npQ"/>
+                            <constraint firstItem="ovY-UW-22f" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="WRW-S7-Ojz"/>
+                            <constraint firstItem="EjN-Pk-fIz" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="coE-5I-N56"/>
+                            <constraint firstItem="EjN-Pk-fIz" firstAttribute="top" secondItem="ovY-UW-22f" secondAttribute="bottom" constant="16" id="hoj-Zj-qKx"/>
+                            <constraint firstItem="ovY-UW-22f" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="k40-Fc-xlC"/>
+                            <constraint firstItem="mfV-yk-eBh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="2" id="lNo-2j-Sj8"/>
+                            <constraint firstItem="mfV-yk-eBh" firstAttribute="top" secondItem="ovY-UW-22f" secondAttribute="bottom" constant="16" id="wkt-dI-qwN"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="EjN-Pk-fIz" secondAttribute="bottom" constant="20" id="zi3-7t-wEi"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="graph" destination="EjN-Pk-fIz" id="jYi-Km-RvE"/>
+                        <outlet property="legendButton" destination="mfV-yk-eBh" id="D04-6z-49c"/>
+                        <outlet property="titleLabel" destination="ovY-UW-22f" id="yGY-85-kcW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="325" y="382"/>
+        </scene>
+    </scenes>
+</document>

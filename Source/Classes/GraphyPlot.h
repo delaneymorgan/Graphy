@@ -14,17 +14,13 @@
 @class GraphyLabel;
 
 @interface GraphyPlot : NSObject {
-	TCoordinate baseCoord;
-	GraphyLabel* label;
-	NSArray* parts;
-	CGFloat width;
 }
 
-@property (assign) TCoordinate baseCoord;
-@property (retain) GraphyLabel* label;
-@property (retain) NSArray* parts;
-@property (assign) CGFloat width;
+@property (nonatomic) TCoordinate baseCoord;
+@property (strong, nonatomic) GraphyLabel* label;
+@property (strong, nonatomic) NSArray* parts;
+@property (nonatomic) CGFloat width;
 
--(id)initWithBaseCoord:(TCoordinate)qBaseCoord width:(CGFloat)qWidth label:(GraphyLabel*)qLabel parts:(NSArray*)qParts;
+-(instancetype)initWithBaseCoord:(TCoordinate)qBaseCoord width:(CGFloat)qWidth label:(GraphyLabel*)qLabel parts:(NSArray*)qParts;
 
 @end

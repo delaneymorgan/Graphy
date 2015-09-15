@@ -8,14 +8,10 @@
 
 #import "GraphyPlotPart.h"
 
-#import "dbc_def.h"
 #import "trace_def.h"
 
 
 @implementation GraphyPlotPart
-
-@synthesize fill;
-@synthesize value;
 
 
 #define TRACE_FLAG		(NO)
@@ -23,10 +19,10 @@
 // ============================================================================================
 
 
--(id)initWithValue:(TCoordinate)qValue fill:(GraphyFill*)qFill {
+-(instancetype)initWithValue:(TCoordinate)qValue fill:(GraphyFill*)qFill {
 	TRACE_START();
 	
-	if ([super init])
+	if (self = [super init])
 	{
 		self.value = qValue;
 		self.fill = qFill;
@@ -42,7 +38,6 @@
 	TRACE_START();
 
 	self.fill = nil;
-	[super dealloc];
 	TRACE_END();
 }
 

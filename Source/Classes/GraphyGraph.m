@@ -10,7 +10,6 @@
 
 #import "GraphyXAxis.h"
 #import "GraphyYAxis.h"
-#import "dbc_def.h"
 #import "trace_def.h"
 #import "GraphyScale.h"
 #import "GraphyRange.h"
@@ -19,17 +18,16 @@
 #import "GraphyFill.h"
 #import "GraphyCoordinate.h"
 #import "GraphyGraduation.h"
-//#import "UIColor-Expanded.h"
 #import "GraphyLabel.h"
 #import "GraphyLegend.h"
 
 
 @implementation GraphyGraph
 
-@synthesize xAxis;
-@synthesize yAxis;
-@synthesize plots;
-@synthesize legend;
+
+@synthesize xAxis = _xAxis;
+@synthesize yAxis = _yAxis;
+@synthesize legend = _legend;
 
 
 #define TRACE_FLAG		(NO)
@@ -37,22 +35,13 @@
 // ============================================================================================
 
 
--(id)init {
+-(instancetype)init {
 	TRACE_START();
 
     if (self = [super init])
 	{
-		self.xAxis = [[GraphyXAxis alloc] init];
-		MIDCONDITION( xAxis);
-		self.yAxis = [[GraphyYAxis alloc] init];
-		MIDCONDITION( yAxis);
-		self.legend = [[GraphyLegend alloc] init];
-		MIDCONDITION( legend);
     }
 	TRACE_END();
-	return self;
-	
-EXCEPTION:
 	return self;
 }
 
@@ -63,7 +52,36 @@ EXCEPTION:
 	self.xAxis = nil;
 	self.yAxis = nil;
 	self.legend = nil;
-	[super dealloc];
+}
+
+// ============================================================================================
+
+
+-(GraphyXAxis*)xAxis {
+    if (!_xAxis) {
+        _xAxis = [[GraphyXAxis alloc] init];
+    }
+    return _xAxis;
+}
+
+// ============================================================================================
+
+
+-(GraphyYAxis*)yAxis {
+    if (!_yAxis) {
+        _yAxis = [[GraphyYAxis alloc] init];
+    }
+    return _yAxis;
+}
+
+// ============================================================================================
+
+
+-(GraphyLegend*)legend {
+    if (!_legend) {
+        _legend = [[GraphyLegend alloc] init];
+    }
+    return _legend;
 }
 
 // ============================================================================================
@@ -80,18 +98,13 @@ EXCEPTION:
 
 	TRACE_START();
 
-	PRECONDITION( qContext);
-	
-	GraphyScale* xScale = xAxis.scale;
-	MIDCONDITION( xScale);
-	GraphyScale* yScale = yAxis.scale;
-	MIDCONDITION( yScale);
+	GraphyScale* xScale = self.xAxis.scale;
+	GraphyScale* yScale = self.yAxis.scale;
 	
 	// get a coordinate converter
 	coord = [[GraphyCoordinate alloc] initWithFrame:qRect];
-	MIDCONDITION( coord);
 	
-	NSEnumerator* plotEnum = [plots objectEnumerator];
+	NSEnumerator* plotEnum = [self.plots objectEnumerator];
 	GraphyPlot* thisPlot = nil;
 	while (thisPlot = [plotEnum nextObject])
 	{
@@ -129,12 +142,7 @@ EXCEPTION:
 		
 	}
 	
-	[coord release];
 	TRACE_END();
-	return;
-	
-EXCEPTION:
-	RELEASEIF( coord);
 	return;
 }
 
@@ -153,48 +161,48 @@ EXCEPTION:
 	TRACE_START();
 	
 	context = UIGraphicsGetCurrentContext();
-	MIDCONDITION( context);
+    
+    TRACE_CHECK( @"qRect: (%f:%f):(%f:%f)", qRect.origin.x, qRect.origin.y, qRect.size.width, qRect.size.height);
 	
 	// get scales for plot
-	GraphyScale* xScale = xAxis.scale;
-	MIDCONDITION( xScale);
-	GraphyScale* yScale = yAxis.scale;
-	MIDCONDITION( yScale);
+	GraphyScale* xScale = self.xAxis.scale;
+	GraphyScale* yScale = self.yAxis.scale;
 	
 	// set scale denomitators
 	TCoordinate xAdjust = 0.0;
-	if (xAxis.origin < xAxis.range.minimum)
+	if (self.xAxis.origin < self.xAxis.range.minimum)
 	{
-		xAdjust = (xAxis.range.minimum - xAxis.origin);
+		xAdjust = (self.xAxis.range.minimum - self.xAxis.origin);
 	}
-	else if (xAxis.origin > xAxis.range.maximum)
+	else if (self.xAxis.origin > self.xAxis.range.maximum)
 	{
-		xAdjust = (xAxis.origin - xAxis.range.minimum);
+		xAdjust = (self.xAxis.origin - self.xAxis.range.minimum);
 	}
+    TRACE_CHECK( @"xAdjust: %f", xAdjust);
 	TCoordinate yAdjust = 0.0;
-	if (yAxis.origin < yAxis.range.minimum)
+	if (self.yAxis.origin < self.yAxis.range.minimum)
 	{
-		yAdjust = (yAxis.range.minimum - yAxis.origin);
+		yAdjust = (self.yAxis.range.minimum - self.yAxis.origin);
 	}
-	else if (yAxis.origin > yAxis.range.maximum)
+	else if (self.yAxis.origin > self.yAxis.range.maximum)
 	{
-		yAdjust = (yAxis.origin - yAxis.range.minimum);
+		yAdjust = (self.yAxis.origin - self.yAxis.range.minimum);
 	}
+    TRACE_CHECK( @"yAdjust: %f", yAdjust);
 	
-	xScale.numerator = (xAxis.range.maximum - xAxis.range.minimum) + xAdjust;
-	yScale.numerator = (yAxis.range.maximum - yAxis.range.minimum) + yAdjust;
+	xScale.numerator = (self.xAxis.range.maximum - self.xAxis.range.minimum) + xAdjust;
+	yScale.numerator = (self.yAxis.range.maximum - self.yAxis.range.minimum) + yAdjust;
 	xScale.denominator = qRect.size.width;
 	yScale.denominator = qRect.size.height;
+    TRACE_CHECK( @"xScale: %f/%f", xScale.numerator, xScale.denominator);
+    TRACE_CHECK( @"yScale: %f/%f", yScale.numerator, yScale.denominator);
 
 	[self drawPlot:context rect:qRect];
 
-	[xAxis drawRect:qRect otherScale:yScale];
-	[yAxis drawRect:qRect otherScale:xScale];
+	[self.xAxis drawRect:qRect otherScale:yScale];
+	[self.yAxis drawRect:qRect otherScale:xScale];
 
 	TRACE_END();
-	return;
-	
-EXCEPTION:
 	return;
 }
 
@@ -212,36 +220,35 @@ EXCEPTION:
 	
 	CGRect skeletonRect = qRect;		// start with original rect
 
-	// subtract width of yAxis label
-	CGSize yAxisLabelSize = [yAxis.label size];
+    TRACE_CHECK( @"qRect: (%f:%f):(%f:%f)", qRect.origin.x, qRect.origin.y, qRect.size.width, qRect.size.height);
+
+    // subtract width of yAxis label
+	CGSize yAxisLabelSize = [self.yAxis.label size];
 	skeletonRect.origin.x += yAxisLabelSize.width;
 	skeletonRect.size.width -= yAxisLabelSize.width;
 	
 	// subtract height of xAxis label
-	CGSize xAxisLabelSize = [xAxis.label size];
+	CGSize xAxisLabelSize = [self.xAxis.label size];
 	skeletonRect.size.height -= xAxisLabelSize.height;
 
 	// subtract width of yGraduationLabels
-	if (yAxis.graduationLabels)
+	if (self.yAxis.graduationLabels)
 	{
-		CGFloat yGraduationLabelsWidth = [GraphyGraduation maximumWidth:yAxis.graduationLabels font:yAxis.majorGraduation.labelFont];
+		CGFloat yGraduationLabelsWidth = [GraphyGraduation maximumWidth:self.yAxis.graduationLabels font:self.yAxis.majorGraduation.labelFont];
 		skeletonRect.origin.x += yGraduationLabelsWidth;
 		skeletonRect.size.width -= yGraduationLabelsWidth;
 	}
 
 	// subtract height of xGraduationLabels
-	if (xAxis.graduationLabels)
+	if (self.xAxis.graduationLabels)
 	{
-		CGFloat xGraduationLabelsHeight = [GraphyGraduation maximumHeight:xAxis.graduationLabels font:yAxis.majorGraduation.labelFont];
+		CGFloat xGraduationLabelsHeight = [GraphyGraduation maximumHeight:self.xAxis.graduationLabels font:self.yAxis.majorGraduation.labelFont];
 		skeletonRect.size.height -= xGraduationLabelsHeight;
 	}
 	
 	[self drawSkeleton:skeletonRect showLegend:(BOOL)qShowLegend];
 	
 	TRACE_END();
-	return;
-	
-EXCEPTION:
 	return;
 }
 
@@ -257,18 +264,15 @@ EXCEPTION:
 -(void)drawRect:(CGRect)qRect showLegend:(BOOL)qShowLegend {
 	TRACE_START();
 
-	if (qShowLegend && legend)
+	if (qShowLegend && self.legend)
 	{
-		[legend drawRect:qRect];
+		[self.legend drawRect:qRect];
 	} else
 	{
 		[self drawElements:qRect showLegend:(BOOL)qShowLegend];
 	}
 	
 	TRACE_END();
-	return;
-	
-EXCEPTION:
 	return;
 }
 

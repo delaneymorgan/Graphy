@@ -10,8 +10,6 @@
 
 #import "GraphyGraph.h"
 #import "trace_def.h"
-#import "dbc_def.h"
-//#import "Utility.h"
 #import "GraphyXAxis.h"
 #import "GraphyYAxis.h"
 #import "GraphyRange.h"
@@ -28,8 +26,8 @@
 
 @implementation GraphyView
 
-@synthesize graph;
-@synthesize showLegend;
+
+@synthesize graph = _graph;
 
 
 #define TRACE_FLAG		(NO)
@@ -44,9 +42,6 @@
 	TRACE_START();
 
 	// Initialization code
-	GraphyGraph* newGraph = [[GraphyGraph alloc] init];
-	MIDCONDITION( newGraph);
-	self.graph = newGraph;
 	self.showLegend = NO;
     self.backgroundColor = [UIColor clearColor];
 	TRACE_END();
@@ -101,8 +96,17 @@ EXCEPTION:
 -(void)dealloc {
 	TRACE_START();
 	self.graph = nil;
-    [super dealloc];
 	TRACE_END();
+}
+
+// ============================================================================================
+
+
+-(GraphyGraph*)graph {
+    if (!_graph) {
+        _graph = [[GraphyGraph alloc] init];
+    }
+    return _graph;
 }
 
 // ============================================================================================
@@ -110,7 +114,7 @@ EXCEPTION:
 
 -(void)setLegend:(GraphyLegend*)qLegend {
 	TRACE_START();
-	graph.legend = qLegend;
+	self.graph.legend = qLegend;
 	TRACE_END();
 }
 
@@ -123,19 +127,10 @@ EXCEPTION:
  * @param rect the bounding rectangle of the view
  */
 -(void)drawRect:(CGRect)rect {
-	CGContextRef context = NULL;
-	
 	TRACE_START();
-	
-	context = UIGraphicsGetCurrentContext();
-	MIDCONDITION( context);
 	CGRect workRect = CGRectInset(rect, 50.0, 50.0);
-	[graph drawRect:workRect showLegend:showLegend];
-END:
+	[self.graph drawRect:workRect showLegend:self.showLegend];
 	TRACE_END();
-	return;
-	
-EXCEPTION:
 	return;
 }
 
@@ -150,13 +145,8 @@ EXCEPTION:
 -(void)setPlots:(NSArray*)qPlots {
 	TRACE_START();
 	
-	PRECONDITION( qPlots);
-	
-	graph.plots = qPlots;
+	self.graph.plots = qPlots;
 	TRACE_END();
-	return;
-	
-EXCEPTION:
 	return;
 }
 
@@ -166,7 +156,7 @@ EXCEPTION:
 -(void)setXOrigin:(TCoordinate)qOrigin {
 	TRACE_START();
 
-	graph.xAxis.origin = qOrigin;
+	self.graph.xAxis.origin = qOrigin;
 	TRACE_END();
 	return;
 }
@@ -177,7 +167,7 @@ EXCEPTION:
 -(void)setYOrigin:(TCoordinate)qOrigin {
 	TRACE_START();
 	
-	graph.yAxis.origin = qOrigin;
+	self.graph.yAxis.origin = qOrigin;
 	TRACE_END();
 	return;
 }
@@ -188,13 +178,8 @@ EXCEPTION:
 -(void)setXLabel:(GraphyLabel*)qLabel {
 	TRACE_START();
 	
-	PRECONDITION( qLabel);
-	
-	graph.xAxis.label = qLabel;
+	self.graph.xAxis.label = qLabel;
 	TRACE_END();
-	return;
-	
-EXCEPTION:
 	return;
 }
 
@@ -204,13 +189,8 @@ EXCEPTION:
 -(void)setYLabel:(GraphyLabel*)qLabel {
 	TRACE_START();
 	
-	PRECONDITION( qLabel);
-	
-	graph.yAxis.label = qLabel;
+	self.graph.yAxis.label = qLabel;
 	TRACE_END();
-	return;
-	
-EXCEPTION:
 	return;
 }
 
@@ -226,12 +206,9 @@ EXCEPTION:
 -(void)setXRangeWithMin:(TCoordinate)qMinimum max:(TCoordinate)qMaximum {
 	TRACE_START();
 	
-	graph.xAxis.range.minimum = qMinimum;
-	graph.xAxis.range.maximum = qMaximum;
+	self.graph.xAxis.range.minimum = qMinimum;
+	self.graph.xAxis.range.maximum = qMaximum;
 	TRACE_END();
-	return;
-		
-EXCEPTION:
 	return;
 }
 
@@ -247,12 +224,9 @@ EXCEPTION:
 -(void)setYRangeWithMin:(TCoordinate)qMinimum max:(TCoordinate)qMaximum {
 	TRACE_START();
 	
-	graph.yAxis.range.minimum = qMinimum;
-	graph.yAxis.range.maximum = qMaximum;
+	self.graph.yAxis.range.minimum = qMinimum;
+	self.graph.yAxis.range.maximum = qMaximum;
 	TRACE_END();
-	return;
-	
-EXCEPTION:
 	return;
 }
 
@@ -261,7 +235,7 @@ EXCEPTION:
 
 -(void)setXMajorGraduation:(TCoordinate)qIncrement {
 	TRACE_START();
-	graph.xAxis.majorGraduation.increment = qIncrement;
+	self.graph.xAxis.majorGraduation.increment = qIncrement;
 	TRACE_END();
 }
 
@@ -270,7 +244,7 @@ EXCEPTION:
 
 -(void)setYMajorGraduation:(TCoordinate)qIncrement {
 	TRACE_START();
-	graph.yAxis.majorGraduation.increment = qIncrement;
+	self.graph.yAxis.majorGraduation.increment = qIncrement;
 	TRACE_END();
 }
 
@@ -279,7 +253,7 @@ EXCEPTION:
 
 -(void)setXMinorGraduation:(TCoordinate)qIncrement {
 	TRACE_START();
-	graph.xAxis.minorGraduation.increment = qIncrement;
+	self.graph.xAxis.minorGraduation.increment = qIncrement;
 	TRACE_END();
 }
 
@@ -288,7 +262,7 @@ EXCEPTION:
 
 -(void)setYMinorGraduation:(TCoordinate)qIncrement {
 	TRACE_START();
-	graph.yAxis.minorGraduation.increment = qIncrement;
+	self.graph.yAxis.minorGraduation.increment = qIncrement;
 	TRACE_END();
 }
 
@@ -298,7 +272,7 @@ EXCEPTION:
 -(NSUInteger)numXMajorGraduations {
 	NSUInteger ret = 0;
 	TRACE_START();
-	ret = (graph.xAxis.range.maximum - graph.xAxis.range.minimum) / graph.xAxis.majorGraduation.increment;
+	ret = (self.graph.xAxis.range.maximum - self.graph.xAxis.range.minimum) / self.graph.xAxis.majorGraduation.increment;
 	TRACE_END();
 	return ret;
 }
@@ -308,7 +282,7 @@ EXCEPTION:
 
 -(void)setXMajorGraduationLabels:(NSArray*)qLabels {
 	TRACE_START();
-	graph.xAxis.graduationLabels = qLabels;
+	self.graph.xAxis.graduationLabels = qLabels;
 	TRACE_END();
 }
 
@@ -318,7 +292,7 @@ EXCEPTION:
 -(NSUInteger)numYMajorGraduations {
 	NSUInteger ret = 0;
 	TRACE_START();
-	ret = (graph.yAxis.range.maximum - graph.yAxis.range.minimum) / graph.yAxis.majorGraduation.increment;
+	ret = (self.graph.yAxis.range.maximum - self.graph.yAxis.range.minimum) / self.graph.yAxis.majorGraduation.increment;
 	TRACE_END();
 	return ret;
 }
@@ -328,7 +302,7 @@ EXCEPTION:
 
 -(void)setYMajorGraduationLabels:(NSArray*)qLabels {
 	TRACE_START();
-	graph.yAxis.graduationLabels = qLabels;
+	self.graph.yAxis.graduationLabels = qLabels;
 	TRACE_END();
 }
 

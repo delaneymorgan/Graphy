@@ -12,12 +12,11 @@
 
 
 @interface GraphyCoordinate : NSObject {
-	CGRect frame;
 }
 
-@property (assign) CGRect frame;
+@property (nonatomic) CGRect frame;
 
--(id)initWithFrame:(CGRect)qFrame;
+-(instancetype)initWithFrame:(CGRect)qFrame;
 -(CGFloat)toCGXCoord:(TCoordinate)qGraphCoord;
 -(CGFloat)toCGYCoord:(TCoordinate)qGraphCoord;
 +(CGFloat)toCGXCoord:(TCoordinate)qGraphCoord frame:(CGRect)qFrame;

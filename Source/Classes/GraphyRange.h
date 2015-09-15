@@ -12,13 +12,11 @@
 
 
 @interface GraphyRange : NSObject {
-	TCoordinate minimum;
-	TCoordinate maximum;
 }
 
-@property (assign) TCoordinate minimum;
-@property (assign) TCoordinate maximum;
+@property (nonatomic) TCoordinate minimum;
+@property (nonatomic) TCoordinate maximum;
 
--(id)initWithMinimum:(TCoordinate)qMinimum maximum:(TCoordinate)qMaximum;
+-(instancetype)initWithMinimum:(TCoordinate)qMinimum maximum:(TCoordinate)qMaximum;
 
 @end

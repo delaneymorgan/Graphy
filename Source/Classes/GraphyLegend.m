@@ -9,20 +9,14 @@
 #import "GraphyLegend.h"
 
 #import "trace_def.h"
-#import "dbc_def.h"
-//#import "UIColor-Expanded.h"
 #import "GraphyGraduation.h"
 
 
 @implementation GraphyLegend
 
-@synthesize colorHeading;
-@synthesize labelHeading;
-@synthesize headingColor;
-@synthesize labelColor;
-@synthesize labelFont;
-@synthesize colors;
-@synthesize names;
+
+@synthesize names = _names;
+@synthesize colors = _colors;
 
 
 #define TRACE_FLAG		(NO)
@@ -30,15 +24,13 @@
 // ============================================================================================
 
 
--(id)initWithFont:(UIFont*)qLabelFont color:(UIColor*)qLabelColor {
+-(instancetype)initWithFont:(UIFont*)qLabelFont color:(UIColor*)qLabelColor {
 	TRACE_START();
-	if ([super init])
+	if (self = [super init])
 	{
 		self.headingColor = [UIColor whiteColor];
 		self.labelFont = qLabelFont;
 		self.labelColor = qLabelColor;
-		self.names = [[NSMutableArray alloc] init];
-		self.colors = [[NSMutableArray alloc] init];
 	}
 	TRACE_END();
 	return self;
@@ -56,8 +48,27 @@
 	self.labelFont = nil;
 	self.colors = nil;
 	self.names = nil;
-	[super dealloc];
 	TRACE_END();
+}
+
+// ============================================================================================
+
+
+-(NSMutableArray*)names {
+    if (!_names) {
+        _names = [[NSMutableArray alloc] init];
+    }
+    return _names;
+}
+
+// ============================================================================================
+
+
+-(NSMutableArray*)colors {
+    if (!_colors) {
+        _colors = [[NSMutableArray alloc] init];
+    }
+    return _colors;
 }
 
 // ============================================================================================
@@ -68,15 +79,10 @@
 	
 	TRACE_START();
 	
-	PRECONDITION( qName);
-	
-	if ([names containsObject:qName]) {
+	if ([self.names containsObject:qName]) {
 		ret = YES;
 	}
 	TRACE_END();
-	return ret;
-	
-EXCEPTION:
 	return ret;
 }
 
@@ -86,16 +92,10 @@ EXCEPTION:
 -(void)addName:(NSString*)qName color:(UIColor*)qColor {
 	TRACE_START();
 	
-	PRECONDITION( qName);
-	PRECONDITION( qColor);
-	
-	[names addObject:qName];
-	[colors addObject:qColor];
+	[self.names addObject:qName];
+	[self.colors addObject:qColor];
 	
 	TRACE_END();
-	return;
-	
-EXCEPTION:
 	return;
 }
 
@@ -107,13 +107,10 @@ EXCEPTION:
 	
 	TRACE_START();
 	
-	PRECONDITION( [names count] == [colors count]);
-	
 	CGContextRef context = UIGraphicsGetCurrentContext();
-	MIDCONDITION( context);
 
-	NSUInteger numPairs = [names count];
-	if (labelHeading)
+	NSUInteger numPairs = [self.names count];
+	if (self.labelHeading)
 	{
 		numPairs++;		// room for headings
 	}
@@ -121,18 +118,9 @@ EXCEPTION:
 	
 	CGContextSetFillColorWithColor( context, [UIColor blackColor].CGColor);
 	CGContextFillRect( context, qRect);
-	CGFloat maxLabelWidth = [GraphyGraduation maximumWidth:names font:labelFont];
-	if (labelHeading)
-	{
-//		CGSize thisSize = [labelHeading sizeWithFont:labelFont];
-        CGSize thisSize = [labelHeading sizeWithAttributes:@{ NSFontAttributeName:labelFont}];
-		if (thisSize.width > maxLabelWidth)
-		{
-			maxLabelWidth = thisSize.width;
-		}
-	}
-//	CGSize thisSize = [colorHeading sizeWithFont:labelFont];
-    CGSize thisSize = [colorHeading sizeWithAttributes:@{ NSFontAttributeName:labelFont}];
+
+    NSDictionary* attributes = @{ NSForegroundColorAttributeName:[UIColor blackColor], NSFontAttributeName:self.labelFont};
+    CGSize thisSize = [self.colorHeading sizeWithAttributes:attributes];
 	CGFloat swatchWidth = thisSize.width;
 	if (pairHeight > swatchWidth)
 	{
@@ -148,36 +136,37 @@ EXCEPTION:
 									 qRect.size.width,
 									 pairHeight);
 		
-		if (labelHeading)
+		if (self.labelHeading)
 		{
 			if (!pairNo)
 			{
 				// draw headings
-				thisColor = headingColor;
-				thisName = labelHeading;
+				thisColor = self.headingColor;
+				thisName = self.labelHeading;
 			}
 			else
 			{
-				thisColor = [colors objectAtIndex:pairNo - 1];
-				thisName = [names objectAtIndex:pairNo - 1];
+				thisColor = [self.colors objectAtIndex:pairNo - 1];
+				thisName = [self.names objectAtIndex:pairNo - 1];
 			}
 		}
 		else
 		{
-			thisColor = [colors objectAtIndex:pairNo];
-			thisName = [names objectAtIndex:pairNo];
+			thisColor = [self.colors objectAtIndex:pairNo];
+			thisName = [self.names objectAtIndex:pairNo];
 		}
 
-		if (labelHeading && !pairNo)
+		if (self.labelHeading && !pairNo)
 		{
 			// draw color heading
 			CGPoint textPoint;
 			textPoint.x = pairRect.origin.x + (pairRect.size.width / 2) - swatchWidth - (kColorLabelGap / 2);
-			textPoint.y = pairRect.origin.y + ( pairRect.size.height / 2) - labelFont.ascender + ( labelFont.capHeight / 2);
-			CGContextSetFillColorWithColor( context, headingColor.CGColor);
-			CGContextSetStrokeColorWithColor( context, headingColor.CGColor);
-//			[colorHeading drawAtPoint:textPoint withFont:labelFont];	// draws from tl corner, not base-line as you might expect
-            [colorHeading drawAtPoint:textPoint withAttributes: @{NSFontAttributeName: labelFont}];
+			textPoint.y = pairRect.origin.y + ( pairRect.size.height / 2) - self.labelFont.ascender + ( self.labelFont.capHeight / 2);
+			CGContextSetFillColorWithColor( context, self.headingColor.CGColor);
+			CGContextSetStrokeColorWithColor( context, self.headingColor.CGColor);
+            NSDictionary* attributes = @{ NSForegroundColorAttributeName:self.labelColor, NSFontAttributeName:self.labelFont};
+            [self.colorHeading drawAtPoint:textPoint withAttributes:attributes];
+            TRACE_CHECK( @"self.colorHeading: %@", self.colorHeading);
 		}
 		else
 		{
@@ -192,20 +181,18 @@ EXCEPTION:
 		
 		// draw name
 		CGPoint textPoint;
-		TRACE_CHECK( @"labelFont.capHeight: %f", labelFont.capHeight);
-		TRACE_CHECK( @"labelFont.ascender: %f", labelFont.ascender);
+		TRACE_CHECK( @"labelFont.capHeight: %f", self.labelFont.capHeight);
+		TRACE_CHECK( @"labelFont.ascender: %f", self.labelFont.ascender);
 		textPoint.x = pairRect.origin.x + ( ( pairRect.size.width + kColorLabelGap) / 2);
-		textPoint.y = pairRect.origin.y + ( pairRect.size.height / 2) - labelFont.ascender + ( labelFont.capHeight / 2);
-		CGContextSetFillColorWithColor( context, labelColor.CGColor);
-		CGContextSetStrokeColorWithColor( context, labelColor.CGColor);
-//		[thisName drawAtPoint:textPoint withFont:labelFont];	// draws from tl corner, not base-line as you might expect
-        [thisName drawAtPoint:textPoint withAttributes: @{NSFontAttributeName: labelFont}];
+		textPoint.y = pairRect.origin.y + ( pairRect.size.height / 2) - self.labelFont.ascender + ( self.labelFont.capHeight / 2);
+		CGContextSetFillColorWithColor( context, self.labelColor.CGColor);
+		CGContextSetStrokeColorWithColor( context, self.labelColor.CGColor);
+        NSDictionary* attributes = @{ NSForegroundColorAttributeName:self.labelColor, NSFontAttributeName:self.labelFont};
+        [thisName drawAtPoint:textPoint withAttributes:attributes];
+        TRACE_CHECK( @"thisName: %@", thisName);
 	}
 	
 	TRACE_END();
-	return;
-	
-EXCEPTION:
 	return;
 }
 

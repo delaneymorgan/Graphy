@@ -14,13 +14,11 @@
 @class GraphyFill;
 
 @interface GraphyPlotPart : NSObject {
-	GraphyFill* fill;
-	TCoordinate value;
 }
 
-@property (retain) GraphyFill* fill;
-@property (assign) TCoordinate value;
+@property (strong, nonatomic) GraphyFill* fill;
+@property (nonatomic) TCoordinate value;
 
--(id)initWithValue:(TCoordinate)qValue fill:(GraphyFill*)qFill;
+-(instancetype)initWithValue:(TCoordinate)qValue fill:(GraphyFill*)qFill;
 
 @end

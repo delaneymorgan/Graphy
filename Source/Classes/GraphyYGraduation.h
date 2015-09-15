@@ -15,6 +15,6 @@
 @interface GraphyYGraduation : GraphyGraduation {
 }
 
--(id)initWithIncrement:(TCoordinate)qIncrement;
+-(instancetype)initWithIncrement:(TCoordinate)qIncrement;
 
 @end

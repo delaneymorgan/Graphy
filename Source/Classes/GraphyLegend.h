@@ -10,24 +10,17 @@
 
 
 @interface GraphyLegend : NSObject {
-	NSString* colorHeading;
-	NSString* labelHeading;
-	UIColor* headingColor;
-	UIColor* labelColor;
-	UIFont* labelFont;
-	NSMutableArray* colors;
-	NSMutableArray* names;
 }
 
-@property (retain) NSString* colorHeading;
-@property (retain) NSString* labelHeading;
-@property (retain) UIColor* headingColor;
-@property (retain) UIColor* labelColor;
-@property (retain) UIFont* labelFont;
-@property (retain) NSMutableArray* colors;
-@property (retain) NSMutableArray* names;
+@property (strong, nonatomic) NSString* colorHeading;
+@property (strong, nonatomic) NSString* labelHeading;
+@property (strong, nonatomic) UIColor* headingColor;
+@property (strong, nonatomic) UIColor* labelColor;
+@property (strong, nonatomic) UIFont* labelFont;
+@property (strong, nonatomic) NSMutableArray* colors;
+@property (strong, nonatomic) NSMutableArray* names;
 
--(id)initWithFont:(UIFont*)qLabelFont color:(UIColor*)qLabelColor;
+-(instancetype)initWithFont:(UIFont*)qLabelFont color:(UIColor*)qLabelColor;
 -(BOOL)hasName:(NSString*)qName;
 -(void)addName:(NSString*)qName color:(UIColor*)qColor;
 -(void)drawRect:(CGRect)qRect;

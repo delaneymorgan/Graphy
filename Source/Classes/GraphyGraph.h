@@ -17,18 +17,14 @@
 @class GraphyLabel;
 
 @interface GraphyGraph : NSObject {
-	GraphyXAxis* xAxis;
-	GraphyYAxis* yAxis;
-	NSArray* plots;
-	GraphyLegend* legend;
 }
 
-@property (retain) GraphyXAxis* xAxis;
-@property (retain) GraphyYAxis* yAxis;
-@property (retain) NSArray* plots;
-@property (retain) GraphyLegend* legend;
+@property (strong, nonatomic) GraphyXAxis* xAxis;
+@property (strong, nonatomic) GraphyYAxis* yAxis;
+@property (strong, nonatomic) NSArray* plots;
+@property (strong, nonatomic) GraphyLegend* legend;
 
--(id)init;
+-(instancetype)init;
 -(void)drawRect:(CGRect)qRect showLegend:(BOOL)qShowLegend;
 	
 @end

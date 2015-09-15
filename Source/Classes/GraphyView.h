@@ -16,12 +16,10 @@
 @class GraphyLegend;
 
 @interface GraphyView : UIView {
-	GraphyGraph* graph;
-	BOOL showLegend;
 }
 
-@property (retain) GraphyGraph* graph;
-@property (assign) BOOL showLegend;
+@property (strong, nonatomic) GraphyGraph* graph;
+@property (nonatomic) BOOL showLegend;
 
 -(void)setLegend:(GraphyLegend*)qLegend;
 

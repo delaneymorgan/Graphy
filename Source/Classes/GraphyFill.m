@@ -13,19 +13,15 @@
 
 @implementation GraphyFill
 
-@synthesize text;
-@synthesize startColor;
-@synthesize endColor;
-
 
 #define TRACE_FLAG		(NO)
 
 // ============================================================================================
 
 
--(id)initWithText:(NSString*)qText startColor:(UIColor*)qStartColor endColor:(UIColor*)qEndColor {
+-(instancetype)initWithText:(NSString*)qText startColor:(UIColor*)qStartColor endColor:(UIColor*)qEndColor {
 	TRACE_START();
-	if ([super init])
+	if (self = [super init])
 	{
 		self.text = qText;
 		self.startColor = qStartColor;
@@ -43,7 +39,6 @@
 	self.text = nil;
 	self.startColor = nil;
 	self.endColor = nil;
-	[super dealloc];
 	TRACE_END();
 }
 

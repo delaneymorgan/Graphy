@@ -13,8 +13,6 @@
 #import "GraphyGraduation.h"
 #import "GraphyScale.h"
 #import "trace_def.h"
-#import "dbc_def.h"
-//#import "Utility.h"
 
 
 @interface GraphyAxis (hidden)
@@ -26,16 +24,10 @@
 
 @implementation GraphyAxis
 
-@synthesize label;
-@synthesize origin;
-@synthesize labeller;
-@synthesize range;
-@synthesize scale;
-@synthesize majorGraduation;
-@synthesize minorGraduation;
-@synthesize color;
-@synthesize axisWidth;
-@synthesize graduationLabels;
+
+@synthesize labeller = _labeller;
+@synthesize range = _range;
+@synthesize scale = _scale;
 
 
 #define TRACE_FLAG		(NO)
@@ -51,25 +43,16 @@
 	
 	// Initialization code
 	self.origin = 0.0;
-	self.labeller = [[GraphyLabel alloc] init];
-	MIDCONDITION( labeller);
-	self.range = [[GraphyRange alloc] initWithMinimum:0.0 maximum:10.0];
-	MIDCONDITION( range);
-	self.scale = [[GraphyScale alloc] initWithNumerator:1.0 denominator:1.0];
-	MIDCONDITION( scale);
 	self.color = [UIColor whiteColor];
 	self.axisWidth = 1.0;
 	TRACE_END();
     return self;
-	
-EXCEPTION:
-	return self;
 }
 
 // ============================================================================================
 
 
--(id)init {
+-(instancetype)init {
 	TRACE_START();
 	
     if (self = [super init]) {
@@ -77,15 +60,39 @@ EXCEPTION:
     }
 	TRACE_END();
 	return self;
-	
-EXCEPTION:
-	return self;
 }
 
 // ============================================================================================
 
 
--(id)initWithOrigin:(TCoordinate)qOrigin {
+-(GraphyLabel*)labeller {
+    if (!_labeller) {
+        _labeller = [[GraphyLabel alloc] init];
+    }
+    return _labeller;
+}
+// ============================================================================================
+
+
+-(GraphyRange*)range {
+    if (!_range) {
+        _range = [[GraphyRange alloc] initWithMinimum:0.0 maximum:10.0];
+    }
+    return _range;
+}
+// ============================================================================================
+
+
+-(GraphyScale*)scale {
+    if (!_scale) {
+        _scale = [[GraphyScale alloc] initWithNumerator:1.0 denominator:1.0];
+    }
+    return _scale;
+}
+// ============================================================================================
+
+
+-(instancetype)initWithOrigin:(TCoordinate)qOrigin {
 	TRACE_START();
 	
     if (self = [super init]) {
@@ -93,9 +100,6 @@ EXCEPTION:
 		self.origin = qOrigin;
     }
 	TRACE_END();
-	return self;
-	
-EXCEPTION:
 	return self;
 }
 
@@ -109,7 +113,6 @@ EXCEPTION:
 	self.scale = nil;
 	self.color = nil;
 	self.graduationLabels = nil;
-	[super dealloc];
 }
 
 // ============================================================================================
@@ -125,9 +128,6 @@ EXCEPTION:
 	
 END:
 	TRACE_END();
-	return;
-	
-EXCEPTION:
 	return;
 }
 

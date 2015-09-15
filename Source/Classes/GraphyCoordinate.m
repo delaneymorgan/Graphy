@@ -13,19 +13,17 @@
 
 @implementation GraphyCoordinate
 
-@synthesize frame;
-
 
 #define TRACE_FLAG		(NO)
 
 // ============================================================================================
 
 
--(id)initWithFrame:(CGRect)qFrame {
+-(instancetype)initWithFrame:(CGRect)qFrame {
 	TRACE_START();
-	if ([super init])
+	if (self = [super init])
 	{
-		frame = qFrame;
+		self.frame = qFrame;
 	}
 	TRACE_END();
 	return self;
@@ -38,7 +36,7 @@
 	CGFloat ret = 0.0;
 	
 	TRACE_START();
-	ret = [GraphyCoordinate toCGXCoord:qGraphCoord frame:frame];
+	ret = [GraphyCoordinate toCGXCoord:qGraphCoord frame:self.frame];
 	TRACE_END();
 	return ret;
 }
@@ -50,7 +48,7 @@
 	CGFloat ret = 0.0;
 	
 	TRACE_START();
-	ret = [GraphyCoordinate toCGYCoord:qGraphCoord frame:frame];
+	ret = [GraphyCoordinate toCGYCoord:qGraphCoord frame:self.frame];
 	TRACE_END();
 	return ret;
 }

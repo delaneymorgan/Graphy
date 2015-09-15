@@ -17,31 +17,21 @@
 @class GraphyScale;
 
 @interface GraphyAxis : NSObject {
-	GraphyLabel* label;
-	TCoordinate origin;
-	GraphyLabel* labeller;
-	GraphyRange* range;
-	GraphyScale* scale;
-	GraphyGraduation* majorGraduation;
-	GraphyGraduation* minorGraduation;
-	UIColor* color;
-	TWidth axisWidth;
-	NSArray* graduationLabels;
 }
 
-@property (retain) GraphyLabel* label;
-@property (assign) TCoordinate origin;
-@property (retain) GraphyLabel* labeller;
-@property (retain) GraphyRange* range;
-@property (retain) GraphyScale* scale;
-@property (retain) GraphyGraduation* majorGraduation;
-@property (retain) GraphyGraduation* minorGraduation;
-@property (retain) UIColor* color;
-@property (assign) TWidth axisWidth;
-@property (retain) NSArray* graduationLabels;
+@property (strong, nonatomic) GraphyLabel* label;
+@property (nonatomic) TCoordinate origin;
+@property (strong, nonatomic) GraphyLabel* labeller;
+@property (strong, nonatomic) GraphyRange* range;
+@property (strong, nonatomic) GraphyScale* scale;
+@property (strong, nonatomic) GraphyGraduation* majorGraduation;
+@property (strong, nonatomic) GraphyGraduation* minorGraduation;
+@property (strong, nonatomic) UIColor* color;
+@property (nonatomic) TWidth axisWidth;
+@property (strong, nonatomic) NSArray* graduationLabels;
 
--(id)init;
--(id)initWithOrigin:(TCoordinate)qOrigin;
+-(instancetype)init;
+-(instancetype)initWithOrigin:(TCoordinate)qOrigin;
 -(void)drawRect:(CGRect)rect otherScale:(GraphyScale*)qOtherScale;
 
 @end

@@ -8,9 +8,7 @@
 
 #import "GraphyXGraduation.h"
 
-#import "dbc_def.h"
 #import "trace_def.h"
-#import "Utility.h"
 
 
 @implementation GraphyXGraduation
@@ -21,7 +19,7 @@
 // ============================================================================================
 
 
--(id)initWithIncrement:(TCoordinate)qIncrement {
+-(instancetype)initWithIncrement:(TCoordinate)qIncrement {
 	TRACE_START();
 	
 	if (self = [super initWithIncrement:qIncrement]) {
@@ -43,18 +41,15 @@ EXCEPTION:
 	
 	// save original context
 	context = UIGraphicsGetCurrentContext();
-	MIDCONDITION( context);
 	UIGraphicsPushContext( context);
-	
-	TRACE_CHECK( @"qPoint: %@", PrintCGPoint( qPoint));
 	
 	// draw graduation
 	CGPoint point = qPoint;
 	// +=+ need to allow for thickness of graduation
-	CGContextMoveToPoint( context, point.x, point.y - ( height / 2));
-	CGContextAddLineToPoint( context, point.x, point.y + ( height / 2));
-	CGContextSetStrokeColorWithColor( context, color.CGColor);
-	CGContextSetLineWidth( context, width);
+	CGContextMoveToPoint( context, point.x, point.y - ( self.height / 2));
+	CGContextAddLineToPoint( context, point.x, point.y + ( self.height / 2));
+	CGContextSetStrokeColorWithColor( context, self.color.CGColor);
+	CGContextSetLineWidth( context, self.width);
 	CGContextStrokePath( context);
 	
 	// restore original context

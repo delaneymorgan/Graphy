@@ -9,8 +9,6 @@
 #import "GraphyYAxis.h"
 
 #import "trace_def.h"
-#import "dbc_def.h"
-#import "Utility.h"
 #import "GraphyRange.h"
 #import "GraphyScale.h"
 #import "GraphyYGraduation.h"
@@ -31,12 +29,10 @@
 	
     if (self = [super init]) {
 		self.majorGraduation = [[GraphyYGraduation alloc] initWithIncrement:5.0];
-		MIDCONDITION( majorGraduation);
-		majorGraduation.width = 3.0;
-		majorGraduation.color = color;
+		self.majorGraduation.width = 3.0;
+		self.majorGraduation.color = self.color;
 		self.minorGraduation = [[GraphyYGraduation alloc] initWithIncrement:1.0];
-		MIDCONDITION( minorGraduation);
-		minorGraduation.color = color;
+		self.minorGraduation.color = self.color;
     }
 	TRACE_END();
 	return self;
@@ -60,97 +56,85 @@ EXCEPTION:
 	
 	TRACE_START();
 	
-	PRECONDITION( qOtherScale);
-
 	[super drawRect:rect otherScale:qOtherScale];
 	
 	// get a coordinate converter
 	coord = [[GraphyCoordinate alloc] initWithFrame:rect];
-	MIDCONDITION( coord);
 	
 	// save original context
 	context = UIGraphicsGetCurrentContext();
-	MIDCONDITION( context);
 	UIGraphicsPushContext( context);
-	
-	TRACE_CHECK( @"rect: %@", PrintCGRect( rect));
 	
 	// +=+ account for thickness of axis???
 	
 	// draw axis line
-	CGContextMoveToPoint( context, [coord toCGXCoord:[qOtherScale scale:origin]], [coord toCGYCoord:[scale scale:range.minimum]]);
-	CGContextAddLineToPoint( context, [coord toCGXCoord:[qOtherScale scale:origin]], [coord toCGYCoord:[scale scale:range.maximum]]);
-	CGContextSetStrokeColorWithColor( context, color.CGColor);
-	CGContextSetLineWidth( context, axisWidth);
+	CGContextMoveToPoint( context, [coord toCGXCoord:[qOtherScale scale:self.origin]], [coord toCGYCoord:[self.scale scale:self.range.minimum]]);
+	CGContextAddLineToPoint( context, [coord toCGXCoord:[qOtherScale scale:self.origin]], [coord toCGYCoord:[self.scale scale:self.range.maximum]]);
+	CGContextSetStrokeColorWithColor( context, self.color.CGColor);
+	CGContextSetLineWidth( context, self.axisWidth);
 	CGContextStrokePath( context);
 	
 	// draw minor graduations
-	if (minorGraduation && minorGraduation.increment)
+	if (self.minorGraduation && self.minorGraduation.increment)
 	{
-		TCoordinate firstGraduation = trunc( range.minimum / minorGraduation.increment) * minorGraduation.increment;
+		TCoordinate firstGraduation = trunc( self.range.minimum / self.minorGraduation.increment) * self.minorGraduation.increment;
 		TCoordinate thisGraduation = firstGraduation;
-		while (thisGraduation <= range.maximum)
+		while (thisGraduation <= self.range.maximum)
 		{
-			CGPoint position = CGPointMake( [coord toCGXCoord:[qOtherScale scale:origin]], [coord toCGYCoord:[scale scale:thisGraduation]]);
-			TRACE_CHECK( @"Minor graduation position: %@", PrintCGPoint( position));
-			[minorGraduation drawAtPoint:position];
-			thisGraduation += minorGraduation.increment;
+			CGPoint position = CGPointMake( [coord toCGXCoord:[qOtherScale scale:self.origin]], [coord toCGYCoord:[self.scale scale:thisGraduation]]);
+			[self.minorGraduation drawAtPoint:position];
+            TRACE_CHECK( @"self.minorGraduation: %@", self.minorGraduation);
+			thisGraduation += self.minorGraduation.increment;
 		}
 	}
 	
 	// draw graduation labels
 	CGFloat gradLabelWidth = 0.0;
-	if (graduationLabels)
+	if (self.graduationLabels)
 	{
-		gradLabelWidth = [GraphyGraduation maximumWidth:graduationLabels font:majorGraduation.labelFont];
+		gradLabelWidth = [GraphyGraduation maximumWidth:self.graduationLabels font:self.majorGraduation.labelFont];
 	}
 	
 	// draw major graduations & labels
 	NSUInteger labelNo = 0;
-	if (majorGraduation && majorGraduation.increment)
+	if (self.majorGraduation && self.majorGraduation.increment)
 	{
-		TCoordinate firstGraduation = trunc( range.minimum / majorGraduation.increment) * majorGraduation.increment;
+		TCoordinate firstGraduation = trunc( self.range.minimum / self.majorGraduation.increment) * self.majorGraduation.increment;
 		TCoordinate thisGraduation = firstGraduation;
-		while (thisGraduation <= range.maximum)
+		while (thisGraduation <= self.range.maximum)
 		{
-			CGPoint position = CGPointMake( [coord toCGXCoord:[qOtherScale scale:origin]], [coord toCGYCoord:[scale scale:thisGraduation]]);
-			TRACE_CHECK( @"Major graduation position: %@", PrintCGPoint( position));
-			[majorGraduation drawAtPoint:position];
-			CGContextSetFillColorWithColor( context, majorGraduation.labelColor.CGColor);
-			TRACE_CHECK( @"position: %@", PrintCGPoint( position));
-			if (thisGraduation >= range.minimum)
+			CGPoint position = CGPointMake( [coord toCGXCoord:[qOtherScale scale:self.origin]], [coord toCGYCoord:[self.scale scale:thisGraduation]]);
+			[self.majorGraduation drawAtPoint:position];
+            TRACE_CHECK( @"self.majorGraduation: %@", self.majorGraduation);
+			CGContextSetFillColorWithColor( context, self.majorGraduation.labelColor.CGColor);
+			if (thisGraduation >= self.range.minimum)
 			{
-				if (labelNo < [graduationLabels count])
+				if (labelNo < [self.graduationLabels count])
 				{
-					NSString* thisLabel = [graduationLabels objectAtIndex:labelNo];
+					NSString* thisLabel = [self.graduationLabels objectAtIndex:labelNo];
 					CGPoint labelPos = position;
-					CGFloat rightJust = gradLabelWidth - [thisLabel sizeWithFont:majorGraduation.labelFont].width;
-					labelPos.x -= gradLabelWidth + (majorGraduation.height / 2);
+                    NSDictionary* attributes = @{ NSForegroundColorAttributeName:self.majorGraduation.labelColor, NSFontAttributeName:self.majorGraduation.labelFont};
+					CGFloat rightJust = gradLabelWidth - [thisLabel sizeWithAttributes:attributes].width;
+					labelPos.x -= gradLabelWidth + (self.majorGraduation.height / 2);
 					labelPos.x += rightJust;
-					labelPos.y -= majorGraduation.labelFont.lineHeight / 2;
-					[thisLabel drawAtPoint:labelPos withFont:majorGraduation.labelFont]; 
+					labelPos.y -= self.majorGraduation.labelFont.lineHeight / 2;
+                    [thisLabel drawAtPoint:labelPos withAttributes:attributes];
+                    TRACE_CHECK( @"thisLabel: %@", thisLabel);
 				}
 				labelNo++;
 			}
-			thisGraduation += majorGraduation.increment;
+			thisGraduation += self.majorGraduation.increment;
 		}
 	}
 	
 	// draw label
-	CGFloat labelXPos = rect.origin.x - [label size].width - gradLabelWidth;
-	[label drawForYAtX:labelXPos y:[scale scale:((range.maximum - range.minimum)/2)] coord:coord];
+	CGFloat labelXPos = rect.origin.x - [self.label size].width - gradLabelWidth;
+	[self.label drawForYAtX:labelXPos y:[self.scale scale:((self.range.maximum - self.range.minimum)/2)] coord:coord];
 
 	// restore original context
 	UIGraphicsPopContext();
 	
-	[coord release];
-	
-END:
 	TRACE_END();
-	return;
-	
-EXCEPTION:
-	RELEASEIF( coord);
 	return;
 }
 

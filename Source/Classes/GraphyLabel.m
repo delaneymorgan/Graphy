@@ -9,17 +9,10 @@
 #import "GraphyLabel.h"
 
 #import "trace_def.h"
-#import "dbc_def.h"
 #import "GraphyCoordinate.h"
-#import "UIColor-Expanded.h"
 
 
 @implementation GraphyLabel
-
-@synthesize text;
-@synthesize color;
-@synthesize font;
-@synthesize angle;
 
 
 #define TRACE_FLAG		(NO)
@@ -27,10 +20,10 @@
 // ============================================================================================
 
 
--(id)initWithText:(NSString*)qText color:(UIColor*)qColor font:(UIFont*)qFont angle:(CGFloat)qAngle {
+-(instancetype)initWithText:(NSString*)qText color:(UIColor*)qColor font:(UIFont*)qFont angle:(CGFloat)qAngle {
 	TRACE_START();
 	
-	if ([super init])
+	if (self = [super init])
 	{
 		self.text = qText;
 		self.color = qColor;
@@ -47,16 +40,14 @@
 -(void)drawAtX:(CGFloat)qXPos y:(CGFloat)qYPos coord:(GraphyCoordinate*)qCoord {
 	TRACE_START();
 	
-	PRECONDITION( qCoord);
-	
 	CGContextRef context = UIGraphicsGetCurrentContext();
-	MIDCONDITION( context);
 	
-	CGSize textSize = [text sizeWithFont:font];
+    TRACE_CHECK( @"Nominal Label: \"%@\" at %f:%f", self.text, qXPos, qYPos);
+    CGSize textSize = [self.text sizeWithAttributes:@{NSFontAttributeName: self.font}];
 	CGPoint textPoint = CGPointMake( [qCoord toCGXCoord:(qXPos - (textSize.width / 2))], [qCoord toCGYCoord:qYPos] + (textSize.height / 2));
-	TRACE_CHECK( @"color: %@", [color stringFromColor]);
-	CGContextSetFillColorWithColor( context, color.CGColor);
-	[text drawAtPoint:textPoint withFont:font]; 
+	CGContextSetFillColorWithColor( context, self.color.CGColor);
+    [self.text drawAtPoint:textPoint withAttributes: @{NSFontAttributeName:self.font}];
+    TRACE_CHECK( @"Actual Label: \"%@\" at %f:%f", self.text, textPoint.x, textPoint.y);
 	
 	TRACE_END();
 	return;
@@ -71,16 +62,15 @@ EXCEPTION:
 -(void)drawForXAtX:(CGFloat)qXPos y:(CGFloat)qYPos coord:(GraphyCoordinate*)qCoord {
 	TRACE_START();
 	
-	PRECONDITION( qCoord);
-	
 	CGContextRef context = UIGraphicsGetCurrentContext();
-	MIDCONDITION( context);
 	
-	CGSize textSize = [text sizeWithFont:font];
+    TRACE_CHECK( @"Nominal Label: \"%@\" at %f:%f", self.text, qXPos, qYPos);
+    NSDictionary* attributes = @{ NSForegroundColorAttributeName:self.color, NSFontAttributeName:self.font};
+    CGSize textSize = [self.text sizeWithAttributes:attributes];
 	CGPoint textPoint = CGPointMake( [qCoord toCGXCoord:(qXPos - (textSize.width / 2))], qYPos + (textSize.height / 2));
-	TRACE_CHECK( @"color: %@", [color stringFromColor]);
-	CGContextSetFillColorWithColor( context, color.CGColor);
-	[text drawAtPoint:textPoint withFont:font]; 
+	CGContextSetFillColorWithColor( context, self.color.CGColor);
+    [self.text drawAtPoint:textPoint withAttributes:attributes];
+    TRACE_CHECK( @"Actual Label: \"%@\" at %f:%f", self.text, textPoint.x, textPoint.y);
 	
 	TRACE_END();
 	return;
@@ -95,16 +85,16 @@ EXCEPTION:
 -(void)drawForYAtX:(CGFloat)qXPos y:(CGFloat)qYPos coord:(GraphyCoordinate*)qCoord {
 	TRACE_START();
 	
-	PRECONDITION( qCoord);
-	
 	CGContextRef context = UIGraphicsGetCurrentContext();
-	MIDCONDITION( context);
 	
-	CGSize textSize = [text sizeWithFont:font];
+    TRACE_CHECK( @"Nominal Label: \"%@\" at %f:%f", self.text, qXPos, qYPos);
+    TRACE_CHECK( @"%@", @{ NSFontAttributeName:self.font});
+    NSDictionary* attributes = @{ NSForegroundColorAttributeName:self.color, NSFontAttributeName:self.font};
+    CGSize textSize = [self.text sizeWithAttributes:attributes];
 	CGPoint textPoint = CGPointMake( (qXPos - (textSize.width / 2)), [qCoord toCGYCoord:qYPos] + (textSize.height / 2));
-	TRACE_CHECK( @"color: %@", [color stringFromColor]);
-	CGContextSetFillColorWithColor( context, color.CGColor);
-	[text drawAtPoint:textPoint withFont:font]; 
+	CGContextSetFillColorWithColor( context, self.color.CGColor);
+    [self.text drawAtPoint:textPoint withAttributes:attributes];
+    TRACE_CHECK( @"Actual Label: \"%@\" at %f:%f", self.text, textPoint.x, textPoint.y);
 	
 	TRACE_END();
 	return;
@@ -121,7 +111,7 @@ EXCEPTION:
 	
 	TRACE_START();
 	
-	CGSize textSize = [text sizeWithFont:font];
+    CGSize textSize = [self.text sizeWithAttributes:@{ NSFontAttributeName:self.font}];
 	ret = textSize;
 	
 	TRACE_END();

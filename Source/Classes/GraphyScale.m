@@ -9,14 +9,9 @@
 #import "GraphyScale.h"
 
 #import "trace_def.h"
-#import "dbc_def.h"
 
 
 @implementation GraphyScale
-
-@synthesize numerator;
-@synthesize denominator;
-@synthesize ratio;
 
 
 #define TRACE_FLAG		(NO)
@@ -24,16 +19,16 @@
 // ============================================================================================
 
 
--(id)initWithNumerator:(TCoordinate)qNumerator denominator:(TCoordinate)qDenominator {
+-(instancetype)initWithNumerator:(TCoordinate)qNumerator denominator:(TCoordinate)qDenominator {
 	TRACE_START();
 	
-	if ([super init])
+	if (self = [super init])
 	{
 		self.numerator = qNumerator;
 		self.denominator = qDenominator;
-		if (denominator)
+		if (self.denominator)
 		{
-			self.ratio = numerator / denominator;
+			self.ratio = self.numerator / self.denominator;
 		}
 	}
 	TRACE_END();
@@ -48,7 +43,7 @@
 	
 	TRACE_START();
 	
-	ret = qUnscaledValue / ratio;
+	ret = qUnscaledValue / self.ratio;
 	TRACE_END();
 	return ret;
 }
@@ -61,7 +56,7 @@
 	
 	TRACE_START();
 	
-	ret = qScaledValue * ratio;
+	ret = qScaledValue * self.ratio;
 	TRACE_END();
 	return ret;
 }
@@ -71,11 +66,11 @@
 
 -(void)setNumerator:(TCoordinate)qNumerator {
 	TRACE_START();
-	numerator = qNumerator;
-	ratio = 0.0;
-	if (denominator)
+	_numerator = qNumerator;
+	self.ratio = 0.0;
+	if (self.denominator)
 	{
-		ratio = numerator / denominator;
+		self.ratio = _numerator / self.denominator;
 	}
 	TRACE_END();
 	return;
@@ -86,11 +81,11 @@
 
 -(void)setDenominator:(TCoordinate)qDenominator {
 	TRACE_START();
-	denominator = qDenominator;
-	ratio = 0.0;
-	if (denominator)
+	_denominator = qDenominator;
+	self.ratio = 0.0;
+	if (_denominator)
 	{
-		ratio = numerator / denominator;
+		self.ratio = self.numerator / _denominator;
 	}
 	TRACE_END();
 	return;

@@ -12,22 +12,16 @@
 
 
 @interface GraphyGraduation : NSObject {
-	TCoordinate increment;					// this graduation occurs every increment
-	UIColor* color;							// color of the graduation
-	TWidth width;							// width of the graduation
-	CGFloat height;							// height of the graduation
-	UIColor* labelColor;
-	UIFont* labelFont;
 }
 
-@property (assign) TCoordinate increment;
-@property (retain) UIColor* color;
-@property (assign) TWidth width;
-@property (assign) CGFloat height;
-@property (retain) UIColor* labelColor;
-@property (retain) UIFont* labelFont;
+@property (nonatomic) TCoordinate increment;
+@property (strong, nonatomic) UIColor* color;
+@property (nonatomic) TWidth width;
+@property (nonatomic) CGFloat height;
+@property (strong, nonatomic) UIColor* labelColor;
+@property (strong, nonatomic) UIFont* labelFont;
 
--(id)initWithIncrement:(TCoordinate)qIncrement;
+-(instancetype)initWithIncrement:(TCoordinate)qIncrement;
 -(void)drawAtPoint:(CGPoint)qPoint;
 -(CGSize)graduationLabelSize;
 +(CGFloat)maximumWidth:(NSArray*)qStrings font:(UIFont*)qFont;

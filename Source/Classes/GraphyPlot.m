@@ -9,26 +9,21 @@
 #import "GraphyPlot.h"
 
 #import "trace_def.h"
-#import "dbc_def.h"
 #import "GraphyLabel.h"
 
 
 @implementation GraphyPlot
 
-@synthesize baseCoord;
-@synthesize label;
-@synthesize parts;
-@synthesize width;
 
 #define TRACE_FLAG		(NO)
 
 // ============================================================================================
 
 
--(id)initWithBaseCoord:(TCoordinate)qBaseCoord width:(CGFloat)qWidth label:(GraphyLabel*)qLabel parts:(NSArray*)qParts {
+-(instancetype)initWithBaseCoord:(TCoordinate)qBaseCoord width:(CGFloat)qWidth label:(GraphyLabel*)qLabel parts:(NSArray*)qParts {
 	TRACE_START();
 	
-	if ([super init])
+	if (self = [super init])
 	{
 		self.baseCoord = qBaseCoord;
 		self.label = qLabel;
@@ -47,7 +42,6 @@
 	TRACE_START();
 	self.label = nil;
 	self.parts = nil;
-	[super dealloc];
 	TRACE_END();
 }
 

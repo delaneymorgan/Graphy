@@ -12,18 +12,14 @@
 @class GraphyCoordinate;
 
 @interface GraphyLabel : NSObject {
-	NSString* text;
-	UIColor* color;
-	UIFont* font;
-	CGFloat angle;
 }
 
-@property (retain) NSString* text;
-@property (retain) UIColor* color;
-@property (retain) UIFont* font;
-@property (assign) CGFloat angle;
+@property (strong, nonatomic) NSString* text;
+@property (strong, nonatomic) UIColor* color;
+@property (strong, nonatomic) UIFont* font;
+@property (nonatomic) CGFloat angle;
 
--(id)initWithText:(NSString*)qText color:(UIColor*)qColor font:(UIFont*)qFont angle:(CGFloat)qAngle;
+-(instancetype)initWithText:(NSString*)qText color:(UIColor*)qColor font:(UIFont*)qFont angle:(CGFloat)qAngle;
 -(void)drawAtX:(CGFloat)qXPos y:(CGFloat)qYPos coord:(GraphyCoordinate*)qCoord;
 -(void)drawForXAtX:(CGFloat)qXPos y:(CGFloat)qYPos coord:(GraphyCoordinate*)qCoord;
 -(void)drawForYAtX:(CGFloat)qXPos y:(CGFloat)qYPos coord:(GraphyCoordinate*)qCoord;

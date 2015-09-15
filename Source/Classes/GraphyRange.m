@@ -9,13 +9,9 @@
 #import "GraphyRange.h"
 
 #import "trace_def.h"
-#import "dbc_def.h"
 
 
 @implementation GraphyRange
-
-@synthesize minimum;
-@synthesize maximum;
 
 
 #define TRACE_FLAG		(NO)
@@ -23,10 +19,10 @@
 // ============================================================================================
 
 
--(id)initWithMinimum:(TCoordinate)qMinimum maximum:(TCoordinate)qMaximum {
+-(instancetype)initWithMinimum:(TCoordinate)qMinimum maximum:(TCoordinate)qMaximum {
 	TRACE_START();
 	
-	if ([super init])
+	if (self = [super init])
 	{
 		self.minimum = qMinimum;
 		self.maximum = qMaximum;

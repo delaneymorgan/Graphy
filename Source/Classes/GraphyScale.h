@@ -12,16 +12,13 @@
 
 
 @interface GraphyScale : NSObject {
-	TCoordinate numerator;
-	TCoordinate denominator;
-	TCoordinate ratio;
 }
 
-@property (assign, nonatomic) TCoordinate numerator;
-@property (assign, nonatomic) TCoordinate denominator;
-@property (assign, nonatomic) TCoordinate ratio;
+@property (nonatomic) TCoordinate numerator;
+@property (nonatomic) TCoordinate denominator;
+@property (nonatomic) TCoordinate ratio;
 
--(id)initWithNumerator:(TCoordinate)qNumerator denominator:(TCoordinate)qDenominator;
+-(instancetype)initWithNumerator:(TCoordinate)qNumerator denominator:(TCoordinate)qDenominator;
 -(TCoordinate)scale:(TCoordinate)qUnscaledValue;
 -(TCoordinate)descale:(TCoordinate)qScaledValue;
 

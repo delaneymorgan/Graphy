@@ -8,18 +8,10 @@
 
 #import "GraphyGraduation.h"
 
-#import "dbc_def.h"
 #import "trace_def.h"
 
 
 @implementation GraphyGraduation
-
-@synthesize increment;
-@synthesize color;
-@synthesize width;
-@synthesize height;
-@synthesize labelColor;
-@synthesize labelFont;
 
 
 #define TRACE_FLAG		(NO)
@@ -27,7 +19,7 @@
 // ============================================================================================
 
 
--(id)initWithIncrement:(TCoordinate)qIncrement {
+-(instancetype)initWithIncrement:(TCoordinate)qIncrement {
 	TRACE_START();
 	
 	if (self = [super init]) {
@@ -40,9 +32,6 @@
     }
 	TRACE_END();
 	return self;
-	
-EXCEPTION:
-	return self;
 }
 
 // ============================================================================================
@@ -51,7 +40,6 @@ EXCEPTION:
 	self.color = nil;
 	self.labelColor = nil;
 	self.labelFont = nil;
-	[super dealloc];
 }
 
 // ============================================================================================
@@ -59,11 +47,7 @@ EXCEPTION:
 
 -(void)drawAtPoint:(CGPoint)qPoint {
 	TRACE_START();
-	FAIL;
 	TRACE_END();
-	return;
-	
-EXCEPTION:
 	return;
 }
 
@@ -95,14 +79,11 @@ EXCEPTION:
 	
 	TRACE_START();
 	
-	PRECONDITION( qStrings);
-	PRECONDITION( qFont);
-	
 	NSEnumerator* enumerator = [qStrings objectEnumerator];
 	NSString* thisString = nil;
 	while (thisString = [enumerator nextObject]) {
-//		CGSize thisSize = [thisString sizeWithFont:qFont];
         CGSize thisSize = [thisString sizeWithAttributes:@{ NSFontAttributeName:qFont}];
+        TRACE_CHECK( @"%@ thisSize: (w:%f, h:%f)", thisString, thisSize.width, thisSize.height);
 		if (thisSize.width > maxWidth)
 		{
 			maxWidth = thisSize.width;
@@ -110,9 +91,6 @@ EXCEPTION:
 	}
 	ret = maxWidth;
 	TRACE_END();
-	return ret;
-	
-EXCEPTION:
 	return ret;
 }
 
@@ -132,14 +110,11 @@ EXCEPTION:
 	
 	TRACE_START();
 	
-	PRECONDITION( qStrings);
-	PRECONDITION( qFont);
-	
 	NSEnumerator* enumerator = [qStrings objectEnumerator];
 	NSString* thisString = nil;
 	while (thisString = [enumerator nextObject]) {
-//		CGSize thisSize = [thisString sizeWithFont:qFont];
         CGSize thisSize = [thisString sizeWithAttributes:@{ NSFontAttributeName:qFont}];
+        TRACE_CHECK( @"%@ thisSize: (w:%f, h:%f)", thisString, thisSize.width, thisSize.height);
 		if (thisSize.height > maxHeight)
 		{
 			maxHeight = thisSize.height;
@@ -148,14 +123,7 @@ EXCEPTION:
 	ret = maxHeight;
 	TRACE_END();
 	return ret;
-	
-EXCEPTION:
-	return ret;
 }
-
-// ============================================================================================
-
-
 
 
 @end
